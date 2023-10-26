@@ -1,0 +1,233 @@
+using System;
+using System.Collections.Generic;
+
+class Empleado {
+
+  // Atributos
+  private string cedula;
+  private string nombre; 
+  private string direccion;
+  private string telefono;
+  private double salario;
+
+  // Constructor
+  public Empleado(string cedula, string nombre, string direccion, string telefono, double salario) {
+    this.cedula = cedula;
+    this.nombre = nombre;
+    this.direccion = direccion;
+    this.telefono = telefono;
+    this.salario = salario;
+  }
+
+  // Getters y Setters
+  public string Cedula { get => cedula; set => cedula = value; }
+  public string Nombre { get => nombre; set => nombre = value; }
+  public string Direccion { get => direccion; set => direccion = value; }
+  public string Telefono { get => telefono; set => telefono = value; }
+  public double Salario { get => salario; set => salario = value; }
+
+}
+
+class Menu {
+
+  // Atributos
+  static List<Empleado> empleados = new List<Empleado>();
+
+  // Métodos
+
+  // Menú principal
+  static void MostrarMenu() {
+    Console.WriteLine("Menú Principal");
+    Console.WriteLine("1. Agregar Empleado");
+    Console.WriteLine("2. Consultar Empleado");
+    Console.WriteLine("3. Modificar Empleado");
+    Console.WriteLine("4. Borrar Empleado");
+    Console.WriteLine("5. Inicializar Arreglos");
+    Console.WriteLine("6. Reportes");
+  }
+
+  // Agregar empleados
+  static void AgregarEmpleado() {
+    // Pedir datos al usuario
+    Console.Write("Ingrese cédula: ");
+    string cedula = Console.ReadLine();
+
+    Console.Write("Ingrese nombre: ");
+    string nombre = Console.ReadLine();
+
+    Console.Write("Ingrese dirección: ");
+    string direccion = Console.ReadLine(); 
+
+    Console.Write("Ingrese teléfono: ");
+    string telefono = Console.ReadLine();
+
+    Console.Write("Ingrese salario: ");
+    double salario = double.Parse(Console.ReadLine());
+
+    // Crear el objeto Empleado
+    Empleado empleado = new Empleado(cedula, nombre, direccion, telefono, salario);
+
+    // Agregar al arreglo
+    empleados.Add(empleado);
+  }
+
+  // Consultar empleados
+  static void ConsultarEmpleados() {
+    Console.Write("Ingrese la cédula a buscar: ");
+    string cedula = Console.ReadLine();
+
+    // Buscar en la lista
+    foreach (Empleado e in empleados) {
+      if (e.Cedula == cedula) {
+        Console.WriteLine("Empleado encontrado:");
+        Console.WriteLine(e.Cedula);
+        Console.WriteLine(e.Nombre);
+        Console.WriteLine(e.Direccion);
+        Console.WriteLine(e.Telefono);
+        Console.WriteLine(e.Salario);
+        return;
+      }
+    }
+
+    Console.WriteLine("No se encontró el empleado.");
+  }
+
+  // Modificar empleados
+  static void ModificarEmpleado() {
+    Console.Write("Ingrese la cédula del empleado a modificar: ");
+    string cedula = Console.ReadLine();
+
+    // Buscar el empleado en la lista
+    Empleado empleadoAModificar = null;
+    foreach (Empleado e in empleados) {
+      if (e.Cedula == cedula) {
+        empleadoAModificar = e;
+        break;
+      }
+    }
+
+    if (empleadoAModificar == null) {
+      Console.WriteLine("No se encontró el empleado.");
+      return;
+    }
+
+    // Pedir los nuevos datos
+    Console.Write("Ingrese el nuevo nombre: ");
+    empleadoAModificar.Nombre = Console.ReadLine();
+
+    Console.Write("Ingrese la nueva dirección: ");
+    empleadoAModificar.Direccion = Console.ReadLine();
+
+    Console.Write("Ingrese el nuevo teléfono: ");
+    empleadoAModificar.Telefono = Console.ReadLine();
+
+    Console.Write("Ingrese el nuevo salario: ");
+    empleadoAModificar.Salario = double.Parse(Console.ReadLine());
+
+    Console.WriteLine("Empleado modificado exitosamente.");
+  }
+
+  // Borrar empleados
+  static void BorrarEmpleado() {
+    // Código para borrar por cédula
+  }
+ Console.Write("Ingrese la cédula del empleado a borrar: ");
+  string cedula = Console.ReadLine();
+
+  // Buscar el índice del empleado en la lista
+  int index = -1;
+  for (int i = 0; i < empleados.Count; i++) {
+    if (empleados[i].Cedula == cedula) {
+      index = i;
+      break;
+    }
+  }
+
+  if (index == -1) {
+    Console.WriteLine("No se encontró el empleado.");
+  } else {
+    // Borrar del arreglo
+    empleados.RemoveAt(index);
+    Console.WriteLine("Empleado borrado exitosamente");
+  }
+
+}
+  // Inicializar arreglos
+  static void InicializarArreglos() {
+    // Código para inicializar arreglos
+  
+ empleados.Add(new Empleado("102345", "Juan Perez", "Calle 1", "300123456", 1000000));
+  empleados.Add(new Empleado("202345", "Maria Lopez", "Calle 2", "300789456", 1500000));
+  empleados.Add(new Empleado("302345", "Pedro Gomez", "Calle 3", "300258963", 2000000));
+
+  Console.WriteLine("Arreglos inicializados con datos de ejemplo");
+} 
+  // Reportes
+  static void Reportes() {
+    
+    Console.WriteLine("Reportes");
+    Console.WriteLine("1. Consultar por Cédula");
+    Console.WriteLine("2. Listar ordenado por nombre");
+    Console.WriteLine("3. Promedio de salarios");
+    Console.WriteLine("4. Salario más alto y más bajo");
+
+    int opcionReporte = int.Parse(Console.ReadLine());
+  }
+    switch (opcionReporte) {
+      case 1:
+        // Consultar por cédula
+        break;
+      
+      case 2:
+        // Ordenar por nombre
+        break;
+
+      case 3: 
+        // Promedio salarios
+        break;
+
+      case 4:
+        // Salario max y min
+        break;
+    }
+
+  
+
+  // Método principal
+  public static void Main() {
+    
+    bool salir = false;
+
+    while (!salir) {
+
+      MostrarMenu();
+
+      int opcion = int.Parse(Console.ReadLine());
+
+      switch (opcion) {
+        case 1:
+          AgregarEmpleado();
+          break;
+        case 2:
+          ConsultarEmpleados();
+          break;
+        case 3:
+          ModificarEmpleado();
+          break;
+        case 4:
+          BorrarEmpleado();
+          break;
+        case 5:
+          InicializarArreglos();
+          break;
+        case 6:
+          Reportes();
+          break;
+        default:
+          salir = true;
+          break;
+      }
+    }
+
+  }
+}
